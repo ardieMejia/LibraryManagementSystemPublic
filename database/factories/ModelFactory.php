@@ -34,7 +34,7 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
        ];
 });
 $factory->define(App\Book::class, function (Faker\Generator $faker) {
-    $randomISBN=rand(1000000000,9999999999);
+    $randomISBN=rand(1000000000, 9999999999);
     $randomString=str_random(10);
     return [
         'ISBN' => $randomISBN,
@@ -43,6 +43,3 @@ $factory->define(App\Book::class, function (Faker\Generator $faker) {
         'categories_id' => 1,
     ];
 });
-
-
-

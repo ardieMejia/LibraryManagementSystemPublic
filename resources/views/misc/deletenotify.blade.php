@@ -28,13 +28,12 @@
                     $detailsArray=$Details->toArray();
                     $keys=array_keys($detailsArray);
                     $values=array_values($detailsArray);
-                    for($i=0;$i<sizeof($keys);$i++){
-
-                echo "<tr><th width='20%'>";
-                    echo $keys[$i];
-                    echo "</th><td>";
-                    echo $values[$i];
-                    echo "</td></tr>";
+                    for ($i=0;$i<sizeof($keys);$i++) {
+                        echo "<tr><th width='20%'>";
+                        echo $keys[$i];
+                        echo "</th><td>";
+                        echo $values[$i];
+                        echo "</td></tr>";
                     }
                     ?>
                 </table></div>

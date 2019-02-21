@@ -12,7 +12,6 @@ use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
-
     public function show()
     {
         //
@@ -25,13 +24,11 @@ class CategoriesController extends Controller
 
 
         $firstOrLast="first";
-        return view('admin/categories',["categories"=>$categories,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
-
+        return view('admin/categories', ["categories"=>$categories,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
     }
 
     public function showfilter(Request $request)
     {
-
         $page=$request->page;
         $paginate=$request->paginate;
         $page=$page+$request->direction;
@@ -43,15 +40,16 @@ class CategoriesController extends Controller
         $categories=DB::table('categories')->offset($page*$paginate)->take($paginate)->get();
 
         $rowsLeft=$count-($page)*$paginate;
-        if($page==0)
+        if ($page==0) {
             $firstOrLast="first";
-        elseif($rowsLeft>$paginate)
+        } elseif ($rowsLeft>$paginate) {
             $firstOrLast="middle";
-        else
+        } else {
             $firstOrLast="last";
+        }
 
 
-        return view('admin/categories',['categories'=>$categories,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
+        return view('admin/categories', ['categories'=>$categories,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
     }
 
 
@@ -66,7 +64,7 @@ class CategoriesController extends Controller
     {
         //
 
-        $this->validate($request,[
+        $this->validate($request, [
             'categoryname'=>'required|unique:categories'
         ]);
 
@@ -76,7 +74,7 @@ class CategoriesController extends Controller
 
         $category->save();
         $Details=$category;
-        return view('misc/savenotify',['performed'=>'saved','Details'=>$Details]);
+        return view('misc/savenotify', ['performed'=>'saved','Details'=>$Details]);
     }
 
 
@@ -84,15 +82,14 @@ class CategoriesController extends Controller
     {
         //
         $category=Category::find($id);
-        return view('/admin/categoryedit',['category'=>$category]);
-
+        return view('/admin/categoryedit', ['category'=>$category]);
     }
 
     public function update(Request $request, $id)
     {
         //
 
-        $this->validate($request,[
+        $this->validate($request, [
             'categoryname'=>'required|unique:categories'
         ]);
 
@@ -101,29 +98,23 @@ class CategoriesController extends Controller
         $category->save();
         $Details=$category;
 
-        return view('misc/savenotify',['performed'=>'not really changed','Details'=>$Details]);
+        return view('misc/savenotify', ['performed'=>'not really changed','Details'=>$Details]);
     }
 
 
     public function destroy($id)
     {
-
-
         $Details=Category::find($id);
         $childDetails=Category::find($id)->getBooks();
 
         //        $Details=Category::find($id);
         //        Category::find($id)->deleteAll();
 
-        return view('misc/deletenotify',['performed'=>'removed','Details'=>$Details,'childDetails'=>$childDetails]);
-
+        return view('misc/deletenotify', ['performed'=>'removed','Details'=>$Details,'childDetails'=>$childDetails]);
     }
 
-    public function verifydelete($id){
-        return view('/misc/verifydelete',['id'=>$id,'propertyname'=>'categories']);
+    public function verifydelete($id)
+    {
+        return view('/misc/verifydelete', ['id'=>$id,'propertyname'=>'categories']);
     }
-
-
-
-
 }

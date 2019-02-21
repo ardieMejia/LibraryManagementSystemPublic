@@ -11,7 +11,6 @@ use App\Http\Controllers\Controller;
 
 class AuthorsController extends Controller
 {
-
     public function show()
     {
 
@@ -24,13 +23,11 @@ class AuthorsController extends Controller
 
         $firstOrLast="first";
         $authors=DB::table('authors')->offset($page*$paginate)->take($paginate)->get();
-        return view('/admin/authors',['authors'=>$authors,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
+        return view('/admin/authors', ['authors'=>$authors,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
     }
 
     public function showfilter(Request $request)
     {
-
-
         $page=$request->page;
         $paginate=$request->paginate;
         $page=$page+$request->direction;
@@ -40,15 +37,15 @@ class AuthorsController extends Controller
         $authors=DB::table('authors')->offset($page*$paginate)->take($paginate)->get();
 
         $rowsLeft=$count-($page)*$paginate;
-        if($page==0)
+        if ($page==0) {
             $firstOrLast="first";
-        elseif($rowsLeft>$paginate)
+        } elseif ($rowsLeft>$paginate) {
             $firstOrLast="middle";
-        else
+        } else {
             $firstOrLast="last";
+        }
 
-        return view('/admin/authors',['authors'=>$authors,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
-
+        return view('/admin/authors', ['authors'=>$authors,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate]);
     }
 
 
@@ -63,7 +60,7 @@ class AuthorsController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
+        $this->validate($request, [
             'firstname'=>'required|unique:authors',
             'lastname'=>'required|unique:authors'
         ]);
@@ -72,8 +69,7 @@ class AuthorsController extends Controller
         $author->lastname=$request->lastname;
         $author->save();
         $Details=$author;
-        return view('/misc/savenotify',['performed'=>'saved','Details'=>$Details]);
-
+        return view('/misc/savenotify', ['performed'=>'saved','Details'=>$Details]);
     }
 
 
@@ -82,13 +78,12 @@ class AuthorsController extends Controller
         //
 
         $author=Author::find($id);
-        return view('/admin/authoredit',['author'=>$author]);
+        return view('/admin/authoredit', ['author'=>$author]);
     }
 
     public function update(Request $request, $id)
     {
-
-        $this->validate($request,[
+        $this->validate($request, [
             'firstname'=>'required|unique:authors',
             'lastname'=>'required|unique:authors'
         ]);
@@ -99,8 +94,7 @@ class AuthorsController extends Controller
 
         $Details=$author;
         $author->save();
-        return view('/misc/savenotify',['performed'=>'changed','Details'=>$Details]);
-
+        return view('/misc/savenotify', ['performed'=>'changed','Details'=>$Details]);
     }
 
     public function destroy($id)
@@ -113,15 +107,11 @@ class AuthorsController extends Controller
 
         //        Author::find($id)->deleteAll();
 
-        return view('misc/deletenotify',['performed'=>'removed','Details'=>$Details,'childDetails'=>$childDetails]);
-
+        return view('misc/deletenotify', ['performed'=>'removed','Details'=>$Details,'childDetails'=>$childDetails]);
     }
 
-    public function verifydelete($id){
-
-        return view('/misc/verifydelete',['id'=>$id,'propertyname'=>'authors']);
-
+    public function verifydelete($id)
+    {
+        return view('/misc/verifydelete', ['id'=>$id,'propertyname'=>'authors']);
     }
-
-
 }

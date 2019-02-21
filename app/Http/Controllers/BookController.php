@@ -13,27 +13,24 @@ use App\Http\Controllers\Controller;
 
 class BookController extends Controller
 {
-
     public function show()
     {
-
         $page=1;
         $paginate=2;
         $order="asc";
         $column="title";
 
-        $books=DB::table('books')->join('authors','books.authors_id','=','authors.id')
-              ->join('categories','books.categories_id','=','categories.id')
-              ->select('books.id','ISBN','title','firstname','lastname','categoryname','books.created_at','books.updated_at');
+        $books=DB::table('books')->join('authors', 'books.authors_id', '=', 'authors.id')
+              ->join('categories', 'books.categories_id', '=', 'categories.id')
+              ->select('books.id', 'ISBN', 'title', 'firstname', 'lastname', 'categoryname', 'books.created_at', 'books.updated_at');
         $books=$books->offset(($page-1)*$paginate)->take($paginate)->get();
 
         $firstOrLast="first";
 
-        return view('booksearch',['books'=>$books,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate,'order'=>$order,'column'=>$column]);
+        return view('booksearch', ['books'=>$books,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate,'order'=>$order,'column'=>$column]);
     }
     public function showfilter(Request $request)
     {
-
         $order=$request->order;
         $page=$request->page;
         $page=$page+$request->direction;
@@ -43,33 +40,33 @@ class BookController extends Controller
 
         $count=Book::count();
 
-        $books=DB::table('books')->join('authors','books.authors_id','=','authors.id')
-              ->join('categories','books.categories_id','=','categories.id')
-              ->select('books.id','ISBN','title','firstname','lastname','categoryname','books.created_at','books.updated_at');
-        $books=$books->orderBy($column,$order)->offset(($page-1)*$paginate)->take($paginate)->get();
+        $books=DB::table('books')->join('authors', 'books.authors_id', '=', 'authors.id')
+              ->join('categories', 'books.categories_id', '=', 'categories.id')
+              ->select('books.id', 'ISBN', 'title', 'firstname', 'lastname', 'categoryname', 'books.created_at', 'books.updated_at');
+        $books=$books->orderBy($column, $order)->offset(($page-1)*$paginate)->take($paginate)->get();
 
         $rowsLeft=$count-($page)*$paginate;
-        if($page==1)
+        if ($page==1) {
             $firstOrLast="first";
-        elseif($rowsLeft>$paginate)
+        } elseif ($rowsLeft>$paginate) {
             $firstOrLast="middle";
-        else
+        } else {
             $firstOrLast="last";
+        }
 
-        return view('booksearch',['books'=>$books,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate,'order'=>$order,'column'=>$column]);
+        return view('booksearch', ['books'=>$books,'page'=>$page,'firstOrLast'=>$firstOrLast,'paginate'=>$paginate,'order'=>$order,'column'=>$column]);
     }
 
-    public function create(){
-
+    public function create()
+    {
         $categories=Category::all();
         $authors=Author::all();
-        return view('book/bookform',['categories'=>$categories,'authors'=>$authors]);
-
+        return view('book/bookform', ['categories'=>$categories,'authors'=>$authors]);
     }
 
-    public function store(Request $request){
-
-        $this->validate($request,[
+    public function store(Request $request)
+    {
+        $this->validate($request, [
             'title'=>'required|unique:books',
             'author_id'=>'required',
             'category_id'=>'required'
@@ -83,24 +80,21 @@ class BookController extends Controller
         $book->save();
         $Details=$book;
 
-        return view('misc/savenotify',['performed'=>'saved','Details'=>$Details]);
-
+        return view('misc/savenotify', ['performed'=>'saved','Details'=>$Details]);
     }
 
     public function edit($id)
-
     {
         //
         $book=Book::find($id);
         $categories=Category::all();
         $authors=Author::all();
-        return view('/book/bookedit',['book'=>$book,'categories'=>$categories,'authors'=>$authors]);
-
+        return view('/book/bookedit', ['book'=>$book,'categories'=>$categories,'authors'=>$authors]);
     }
 
-    public function update(Request $request, $id){
-
-        $this->validate($request,[
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
             'title'=>'required',
             'author_id'=>'required',
             'category_id'=>'required'
@@ -113,27 +107,20 @@ class BookController extends Controller
         $book->save();
         $Details=$book;
 
-        return view('/misc/savenotify',['performed'=>'changed','Details'=>$Details]);
-
+        return view('/misc/savenotify', ['performed'=>'changed','Details'=>$Details]);
     }
 
-    public function verifydelete($id){
-
-        return view('/misc/verifydelete',['id'=>$id,'propertyname'=>'book']);
-
-    }
-       public function destroy($id)
+    public function verifydelete($id)
     {
-
+        return view('/misc/verifydelete', ['id'=>$id,'propertyname'=>'book']);
+    }
+    public function destroy($id)
+    {
         $book=Book::find($id);
         $Details=$book;
         $book->delete();
 
 
-        return view('misc/deletenotify',['performed'=>'removed','Details'=>$Details]);
-
+        return view('misc/deletenotify', ['performed'=>'removed','Details'=>$Details]);
     }
-
-
-
 }
