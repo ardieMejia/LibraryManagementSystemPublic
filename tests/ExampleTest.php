@@ -90,6 +90,8 @@ class ExampleTest extends TestCase
     }
     // fuck it delete function hasnt worked yet
     public function test_delete_ScienceFiction_category_along_with_its_books(){
+        $this->visit('/admin/categories')->press('delete')->press('Proceed')
+            ->see('Data removed')->see('The Evolutionary Void')->see('The Dreaming Void')->see('Blood Music');
 
 
     }
