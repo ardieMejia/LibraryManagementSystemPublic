@@ -105,7 +105,7 @@ class AuthorsController extends Controller
         $Details=Author::find($id);
         $childDetails=Author::find($id)->getBooks();
 
-        //        Author::find($id)->deleteAll();
+        Author::find($id)->deleteAll();
 
         return view('misc/deletenotify', ['performed'=>'removed','Details'=>$Details,'childDetails'=>$childDetails]);
     }

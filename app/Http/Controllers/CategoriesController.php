@@ -107,8 +107,8 @@ class CategoriesController extends Controller
         $Details=Category::find($id);
         $childDetails=Category::find($id)->getBooks();
 
-        //        $Details=Category::find($id);
-        //        Category::find($id)->deleteAll();
+        $Details=Category::find($id);
+        Category::find($id)->deleteAll();
 
         return view('misc/deletenotify', ['performed'=>'removed','Details'=>$Details,'childDetails'=>$childDetails]);
     }
