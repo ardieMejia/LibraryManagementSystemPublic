@@ -123,21 +123,5 @@ class AuthorsController extends Controller
 
     }
 
-    public function ardieInsertsData(){
 
-        DB::table('authors')->insert(["firstname"=>"Peter","lastname"=>"Hamilton"]);
-
-        DB::table('authors')->insert(["firstname"=>"Alastair","lastname"=>"Reynolds"]);
-
-        DB::table('authors')->insert(["firstname"=>"Stephen","lastname"=>"King"]);
-
-        DB::table('authors')->insert(["firstname"=>"Paul","lastname"=>"Deitel"]);
-
-        DB::table('authors')->insert(["firstname"=>"Phillip","lastname"=>"Roth"]);
-
-        DB::table('authors')->insert(["firstname"=>"Greg","lastname"=>"Bear"]);
-
-        return "DONE";
-
-    }
 }

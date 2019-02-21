@@ -124,21 +124,6 @@ class CategoriesController extends Controller
     }
 
 
-    //-------------------- for inserting data, not used, and called through routes,
-    //-------------------- will study better way to insert data later
-    public function ardieInsertsData(){
 
-        DB::table('categories')->insert(["categoryname"=>"Science Fiction"]);
 
-        DB::table('categories')->insert(["categoryname"=>"Horror"]);
-
-        DB::table('categories')->insert(["categoryname"=>"Biography/History"]);
-
-        DB::table('categories')->insert(["categoryname"=>"Natural Science"]);
-
-        DB::table('categories')->insert(["categoryname"=>"Science and Technology"]);
-
-        return "done";
-
-    }
 }

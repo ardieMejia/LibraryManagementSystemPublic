@@ -46,10 +46,5 @@ Route::post('/admin/categories/verifydelete/{id}','CategoriesController@verifyde
 Route::post('/admin/categories/delete/{id}','CategoriesController@destroy');
 
 
-//Route::get('/ardieinserts','AuthorsController@ardieInsertsData');
-//Route::get('/ardieinserts','CategoriesController@ardieInsertsData');
 
-
-// ---------- call later ----------
-//Route::get('/ardieinserts','BookController@ardieInsertsData');
 
