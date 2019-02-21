@@ -135,49 +135,5 @@ class BookController extends Controller
     }
 
 
-    public function ardieInsertsData(){
 
-        DB::table('books')->insert(["title"=>"The Dreaming Void","authors_id"=>13,"categories_id"=>14]);
-
-        DB::table('books')->insert(["title"=>"The Naked God","authors_id"=>13,"categories_id"=>14]);
-
-        DB::table('books')->insert(["title"=>"Blood Music","authors_id"=>18,"categories_id"=>14]);
-
-        DB::table('books')->insert(["title"=>"Eon","authors_id"=>18,"categories_id"=>14]);
-
-        DB::table('books')->insert(["title"=>"Pandoras Star","authors_id"=>13,"categories_id"=>14]);
-
-        DB::table('books')->insert(["title"=>"The Great North Road","authors_id"=>13,"categories_id"=>14]);
-
-        DB::table('books')->insert(["title"=>"Judas Unchained","authors_id"=>13,"categories_id"=>14]);
-
-
-        //---------- horror
-        DB::table('books')->insert(["title"=>"From A Buick 8","authors_id"=>15,"categories_id"=>15]);
-
-        DB::table('books')->insert(["title"=>"Pet Cemetary","authors_id"=>15,"categories_id"=>15]);
-
-        DB::table('books')->insert(["title"=>"The Shining","authors_id"=>15,"categories_id"=>15]);
-
-        DB::table('books')->insert(["title"=>"The Dark Tower","authors_id"=>15,"categories_id"=>15]);
-        
-        DB::table('books')->insert(["title"=>"IT","authors_id"=>15,"categories_id"=>15]);
-
-        //---------- biography/history
-        DB::table('books')->insert(["title"=>"American Pastoral","authors_id"=>17,"categories_id"=>16]);
-
-        DB::table('books')->insert(["title"=>"Nemesis","authors_id"=>17,"categories_id"=>16]);
-
-        DB::table('books')->insert(["title"=>"Indignation","authors_id"=>17,"categories_id"=>16]);
-
-        //---------- science and tech
-        DB::table('books')->insert(["title"=>"Operating Systems","authors_id"=>16,"categories_id"=>18]);
-
-        DB::table('books')->insert(["title"=>"Java","authors_id"=>16,"categories_id"=>18]);
-
-        DB::table('books')->insert(["title"=>"C & C++","authors_id"=>16,"categories_id"=>18]);
-
-        return "DONE";
-
-    }
 }
